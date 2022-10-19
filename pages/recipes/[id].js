@@ -24,6 +24,17 @@ export async function getStaticPaths() {
     }
 };
 
+/**
+ * TODO : Add TikTok embed to this component/page
+ * - Create TikTok embed npm component from **other** code
+ * - Use that component here
+ */
+
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export default function Recipe({ recipe }) {
     return (
         <div>

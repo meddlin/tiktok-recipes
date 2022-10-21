@@ -27,26 +27,38 @@ export const recipes = [
     {
         url: "https://www.tiktok.com/t/ZTRHPRA5T/",
         id: "ZTRHPRA5T",
-        account: "",
-        title: ""
+        account: "gaming_foodie",
+        accountUrl: "https://www.tiktok.com/@gaming_foodie",
+        title: "Garlic Green Beans",
+        instructions: [],
+        ingredients: [],
     },
     {
         url: "https://www.tiktok.com/t/ZTRHPLtt7/",
         id: "ZTRHPLtt7",
         account: "pepperbellypete",
-        title: ""
+        accountUrl: "https://www.tiktok.com/@pepperbellypete",
+        title: "Pasta Pig Party",
+        instructions: [],
+        ingredients: [],
     },
     {
         url: "https://www.tiktok.com/t/ZTRHfombS/",
         id: "ZTRHfombS",
-        account: "",
-        title: ""
+        account: "cookiesandcups",
+        accountUrl: "https://www.tiktok.com/@cookiesandcups",
+        title: "Churro Snack Mix",
+        instructions: [],
+        ingredients: [],
     },
     {
         url: "https://www.tiktok.com/t/ZTRHPNfGX/",
         id: "ZTRHPNfGX",
         account: "scaseyfitness",
-        title: "Slow Cooker Honey Garlic Chicken Noodles"
+        accountUrl: "https://www.tiktok.com/@scaseyfitness",
+        title: "Slow Cooker Honey Garlic Chicken Noodles",
+        instructions: [],
+        ingredients: [],
     }
 ];
 

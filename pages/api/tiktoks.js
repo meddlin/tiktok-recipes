@@ -1,6 +1,7 @@
 export const recipes = [
     {
         url: "https://www.tiktok.com/t/ZTRHPMdSV/",
+        embedUrl: "https://www.tiktok.com/@tiggerninjafitness/video/7155596179513068846",
         id: "ZTRHPMdSV",
         account: "tiggerninjafitness",
         accountUrl: "https://www.tiktok.com/@tiggerninjafitness?_t=8WcwcNRWU5m&_r=1",
@@ -16,6 +17,16 @@ export const recipes = [
                 item: "potatoes",
                 amount: "several",
                 unit: ''
+            },
+            {
+                item: "melted butter",
+                amount: "12",
+                unit: "oz"
+            },
+            {
+                item: "garlic (minced)",
+                amount: "1",
+                unit: "clove"
             },
             {
                 item: "oregano",

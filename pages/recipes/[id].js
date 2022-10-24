@@ -1,4 +1,7 @@
 import { getAllRecipes, getRecipe } from "../api/tiktoks";
+import { TikTok } from '../../components/tiktok-embed';
+import { useEffect, useState, useRef } from "react";
+import { Helmet } from 'react-helmet';
 
 export async function getStaticProps({ params }) {
     const id = params.id;
@@ -25,12 +28,6 @@ export async function getStaticPaths() {
 };
 
 /**
- * TODO : Add TikTok embed to this component/page
- * - Create TikTok embed npm component from **other** code
- * - Use that component here
- */
-
-/**
  * 
  * @param {*} param0 
  * @returns 
@@ -43,31 +40,19 @@ export default function Recipe({ recipe }) {
                 <i>{recipe.title}</i>
             </p>
             
-            <div className="recipe-container" style={{ display: `flex` }}>
+            <div className="recipe-container flex flex-row justify-center space-x-6">
 
                 {/* 
                     TikTok video goes here 
                 */}
-                <div className="recipe-media" style={{ border: `1px solid black`, flexGrow: `1` }}>
-                    <a href={recipe.url}>See the TikTok!</a>
-                </div>
+                <TikTok url={recipe.embedUrl} />
 
                 {/* 
                     Actual recipe goes here 
                 */}
-                <div className="recipe" style={{ flexGrow: `1` }}>
-                    <div className="instructions">
-                        <h3>Instructions</h3>
-                        <ul>
-                            {(recipe && recipe.instructions && recipe.instructions.length) > 0 ? (
-                                (recipe.instructions.map((inst, idx) => {
-                                    return (<li key={idx}>{inst}</li>);
-                                }))
-                            ) : ''}
-                        </ul>
-                    </div>
+                <div className="recipe mt-5 space-y-3">
                     <div className="ingredients">
-                        <h3>Ingredients</h3>
+                        <h3 className="text-lg font-medium">Ingredients</h3>
                         <ul>
                             {(recipe && recipe.ingredients && recipe.ingredients.length) > 0 ? (
                                 (recipe.ingredients.map((ing, idx) => {
@@ -76,6 +61,17 @@ export default function Recipe({ recipe }) {
                             ) : ''}
                         </ul>
                     </div>
+                    <div className="instructions">
+                        <h3 className="text-lg font-medium">Instructions</h3>
+                        <ul>
+                            {(recipe && recipe.instructions && recipe.instructions.length) > 0 ? (
+                                (recipe.instructions.map((inst, idx) => {
+                                    return (<li key={idx}>{inst}</li>);
+                                }))
+                            ) : ''}
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
 

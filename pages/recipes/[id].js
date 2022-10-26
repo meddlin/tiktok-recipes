@@ -1,7 +1,5 @@
 import { getAllRecipes, getRecipe } from "../api/tiktoks";
 import { TikTok } from '../../components/tiktok-embed';
-import { useEffect, useState, useRef } from "react";
-import { Helmet } from 'react-helmet';
 
 export async function getStaticProps({ params }) {
     const id = params.id;

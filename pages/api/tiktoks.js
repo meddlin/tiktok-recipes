@@ -80,3 +80,11 @@ export const getAllRecipes = () => {
 export async function getRecipe(id) {
     return recipes.filter(r => r.id === id)[0];
 }
+
+export const getSearchCache = () => {
+    // REMOVE this later
+    console.log(recipes.map( ({id, title}) => ({ id, title})));
+
+    /* reformat objects in array: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#using_map_to_reformat_objects_in_an_array */
+    return recipes.map( ({id, title}) => ({ id, title}));
+}

@@ -20,8 +20,9 @@ tiktok-recipes is built on top of Next.js.
 
 To run the development server:
 
-> `npm run dev`
-> 
-> \# or 
-> 
-> `yarn dev`
+- `npm install`
+- `npm run dev`
+
+\# or 
+
+- `yarn dev`

@@ -57,11 +57,8 @@ export default function Home({ searchArray }) {
         if (recipe.title.toLowerCase().includes(value.toLowerCase())) {
           tempResults.push(recipe);
         }
-      })
-      // CHEAT
-      // tempResults = [{ id: 'Zthe234', title: 'Test Recipe' }];
-
-      console.log(tempResults);
+      });
+      
       setSearchResults(tempResults);
     }
   }

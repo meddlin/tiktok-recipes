@@ -14,8 +14,6 @@ import { recipes, getSearchCache } from './api/tiktoks'
  */
 
  export async function getStaticProps({ params }) {
-  // const id = params.id;
-  // const recipe = await getRecipe(id);
   const searchArray = await getSearchCache();
 
   return {
@@ -31,7 +29,7 @@ import { recipes, getSearchCache } from './api/tiktoks'
  */
 
 export default function Home({ searchArray }) {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(searchArray);
 
   /* Debounce solution: https://javascript.plainenglish.io/implementing-debouncing-in-react-f3316ef344f5 */
   const debounce = (func) => {
@@ -46,6 +44,8 @@ export default function Home({ searchArray }) {
     };
   };
 
+  const optimizedFn = useCallback(debounce(handleSearchChange), []);
+
   function handleSearchChange(value) {
     console.log(`value: ${value}`);
 
@@ -54,16 +54,12 @@ export default function Home({ searchArray }) {
       setSearchResults(searchArray);
     } else {
       searchArray.forEach(recipe => {
-        if (recipe.title.toLowerCase().includes(value.toLowerCase())) {
-          tempResults.push(recipe);
-        }
+        if (recipe.title.toLowerCase().includes(value.toLowerCase())) tempResults.push(recipe);
       });
       
       setSearchResults(tempResults);
     }
   }
-
-  const optimizedFn = useCallback(debounce(handleSearchChange), []);
 
   return (
     <div className="flex flex-col h-screen justify-between items-center">
@@ -72,24 +68,18 @@ export default function Home({ searchArray }) {
       <main>
         <h1 className="text-2xl font-bold underline"> Recipes </h1>
 
-        <input placeholder="Search..." onChange={(ev) => optimizedFn(ev.target.value)} />
+        <input placeholder="Search first..." onChange={(ev) => optimizedFn(ev.target.value)} />
         {searchResults.length > 0 ? searchResults.map((res, key) => {
           return (
-            <div key={key}>{res.title}</div>
-          );
-        }) : 'No results yet' }
-
-        {recipes.map(rec => {
-          return (
-            <p key={rec.url} className="mt-5 mb-5">
-              <b>{rec.title}</b> - <i><a href={rec.accountUrl}>{rec.account}</a></i>
+            <p key={key} className="mt-5 mb-5">
+              <b>{res.title}</b> - <i><a href={res.accountUrl}>{res.account}</a></i>
               <br />
-              <a href={rec.url}>{rec.url}</a>
+              <a href={res.url}>{res.url}</a>
               <br />
-              <a href={`/recipes/${rec.id}`}>Recipe Page -- {rec.title}</a>
+              <a href={`/recipes/${res.id}`}>Recipe Page -- {res.title}</a>
             </p>
           );
-        })}
+        }) : 'No results yet' }
       </main>
 
       {/* Footer */}

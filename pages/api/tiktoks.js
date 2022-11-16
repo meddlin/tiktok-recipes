@@ -73,18 +73,28 @@ export const recipes = [
     }
 ];
 
+/**
+ * Return all recipes
+ * @returns 
+ */
 export const getAllRecipes = () => {
     return recipes;
 };
 
+/**
+ * Get a specific recipe that matches the 'id'
+ * @param {*} id 
+ * @returns 
+ */
 export async function getRecipe(id) {
     return recipes.filter(r => r.id === id)[0];
 }
 
+/**
+ * Return the recipes data array, but modified to only include the
+ * metadata needed for the search to work.
+ */
 export const getSearchCache = () => {
-    // REMOVE this later
-    console.log(recipes.map( ({id, title}) => ({ id, title})));
-
     /* reformat objects in array: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#using_map_to_reformat_objects_in_an_array */
-    return recipes.map( ({id, title}) => ({ id, title}));
+    return recipes.map( ({id, title, account, accountUrl }) => ({ id, title, account, accountUrl }));
 }

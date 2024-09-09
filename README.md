@@ -26,3 +26,10 @@ To run the development server:
 \# or 
 
 - `yarn dev`
+
+
+## Scraping
+
+A good summary list of scrapers: [https://elitedatascience.com/python-web-scraping-libraries#beautiful-soup](https://elitedatascience.com/python-web-scraping-libraries#beautiful-soup)
+
+Following this tutorial: [https://docs.scrapy.org/en/latest/intro/tutorial.html](https://docs.scrapy.org/en/latest/intro/tutorial.html)

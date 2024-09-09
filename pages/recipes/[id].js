@@ -37,13 +37,9 @@ export default function Recipe({ recipe }) {
             <h2 className="text-xl font-bold italic">
                 {recipe.title}
             </h2>
+            <h4>Credit: <a href={recipe.accountUrl}>{recipe.account}</a></h4>
             
-            <div className="recipe-container flex flex-row justify-center space-x-6">
-
-                {/* 
-                    TikTok video goes here 
-                */}
-                <TikTok url={recipe.embedUrl} />
+            <div className="recipe-container flex flex-col justify-center space-x-6">
 
                 {/* 
                     Actual recipe goes here 
@@ -66,16 +62,20 @@ export default function Recipe({ recipe }) {
                                 (recipe.instructions.map((inst, idx) => {
                                     return (
                                         <li key={idx}>
-                                            <h4 className="text-base font-semibold">Step {++idx}</h4>
-                                            {inst}
+                                            <h4 className="text-base font-semibold">Step {++idx}. </h4>
+                                            <p>{inst}</p>
                                         </li>
                                     );
                                 }))
                             ) : ''}
                         </ul>
                     </div>
-                    
                 </div>
+
+                {/* 
+                    TikTok video goes here 
+                */}
+                <TikTok url={recipe.embedUrl} />
             </div>
 
         </div>

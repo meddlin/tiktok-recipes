@@ -97,7 +97,7 @@ export default function SamplePage() {
                                 <br />
                                 <a href={res.url}>{res.url}</a>
                                 <br />
-                                <a href={`/recipes/${res.id}`}>Recipe Page -- {res.title}</a>
+                                <a href={`/sample/${res.id}`}>Recipe Page -- {res.title}</a>
                             </p>
                         );
                     }) : 'No results yet'}

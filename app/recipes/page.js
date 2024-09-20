@@ -40,16 +40,15 @@ export default function Recipes() {
                     </div>
 
                     {/* recipe list */}
-                    <div>
+                    <div className="ml-4">
                         <ul>
                             {recipes.length > 0 ? recipes.map((res, key) => {
                                 return (
-                                    <li key={key} className="mt-5 mb-5">
-                                        <b>{res.title}</b> - <i><a href={res.recipeCredit.accountUrl}>{res.recipeCredit.account}</a></i>
-                                        {/* <br />
-                                    <a href={res.url}>{res.url}</a> */}
-                                        <br />
-                                        <a href={`/sample/${res.id}`}>Recipe Page -- {res.title}</a>
+                                    <li key={key} className="mt-5 mb-5 flex-col">
+                                        <a href={`/sample/${res.id}`}>
+                                            <b>{res.title}</b>
+                                        </a>
+                                        <div className="text-xs">Credit: <a href={res.recipeCredit.accountUrl}>{res.recipeCredit.account}</a></div>
                                     </li>
                                 );
                             }) : 'No recipes yet. Add one to get started!'}

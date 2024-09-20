@@ -1,3 +1,5 @@
+'use client'
+
 export default function Recipes() {
     const recipes = [
         {
@@ -66,11 +68,16 @@ export default function Recipes() {
                 <div>
                     <input placeholder="Search..." />
                 </div>
-                <div className="flex">
+
+                <div>
+                    <button onClick={() => alert('add new recipe')}>Add New</button>
+                </div>
+
+                <div className="flex mt-16">
                     {/* side nav */}
                     <div>
                         <ul>
-                            {'abcdefghijklmnopqrstuvwxyz'.split('').map(c => <li>{c}</li>)}
+                            {'abcdefghijklmnopqrstuvwxyz'.split('').map(c => <li className="py-2 pl-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{c}</li>)}
                         </ul>
                     </div>
 

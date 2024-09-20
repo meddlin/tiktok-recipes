@@ -54,6 +54,15 @@ export default function Recipes() {
                             }) : 'No recipes yet. Add one to get started!'}
                         </ul>
                     </div>
+
+                    {/* filters */}
+                    <div className="ml-16">
+                        <ul>
+                            {['breakfast', 'lunch', 'dinner', 'dessert', 'drinks'].map(opt => (
+                                <li className="my-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{opt}</li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </>

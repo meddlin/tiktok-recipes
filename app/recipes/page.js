@@ -22,8 +22,43 @@ export default function Recipes() {
                 account: "tiggerninjafitness",
                 accountUrl: "https://www.tiktok.com/@tiggerninjafitness?_t=8WcwcNRWU5m&_r=1",
             }
+        },
+        {
+            title: "Dark Palaces",
+            description: "Dressed up 'old fashioned', inspired by James Joyce Irish pub in Baltimore",
+            category: "cocktails",
+            ingredients: [
+                {
+                    name: "Four Roses bourbon",
+                    quantity: "1",
+                    unit: "oz"
+                },
+                {
+                    name: "almond bitters",
+                    quantity: "1-2",
+                    unit: "dashes"
+                },
+            ],
+            directions: [
+                {
+                    explanation: "Mix in glass, pour over ice."
+                },
+            ],
+            recipeCredit: {
+                url: "",
+                embedUrl: "",
+                account: "",
+                accountUrl: "",
+            }
         }
     ]
+
+    function recipeCreditIsEmpty(creditObj) {
+        if (creditObj.url == "" && creditObj.embedUrl == "" && creditObj.account == "" && creditObj.accountUrl == "")
+            return true;
+        
+        return false;
+    }
 
     return (
         <>
@@ -48,7 +83,8 @@ export default function Recipes() {
                                         <a href={`/sample/${res.id}`}>
                                             <b>{res.title}</b>
                                         </a>
-                                        <div className="text-xs">Credit: <a href={res.recipeCredit.accountUrl}>{res.recipeCredit.account}</a></div>
+                                        {recipeCreditIsEmpty(res.recipeCredit) ? '' :
+                                            <div className="text-xs">Credit: <a href={res.recipeCredit.accountUrl}>{res.recipeCredit.account}</a></div>}
                                     </li>
                                 );
                             }) : 'No recipes yet. Add one to get started!'}

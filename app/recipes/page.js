@@ -1,59 +1,8 @@
 'use client'
 
+import recipes from '@/recipe-data';
+
 export default function Recipes() {
-    const recipes = [
-        {
-            title: "Chocolate Chip Cookies",
-            description: "best homemade chocolate chip cookies you could make",
-            category: "dessert",
-            ingredients: [
-                {
-                    name: "egg",
-                    quantity: "2",
-                    unit: ""
-                },
-            ],
-            directions: [
-                {
-                    explanation: "Beat eggs, white sugar, brown sugar together"
-                },
-            ],
-            recipeCredit: {
-                url: "https://www.tiktok.com/t/ZTRHPMdSV/",
-                embedUrl: "https://www.tiktok.com/@tiggerninjafitness/video/7155596179513068846",
-                account: "tiggerninjafitness",
-                accountUrl: "https://www.tiktok.com/@tiggerninjafitness?_t=8WcwcNRWU5m&_r=1",
-            }
-        },
-        {
-            title: "Dark Palaces",
-            description: "Dressed up 'old fashioned', inspired by James Joyce Irish pub in Baltimore",
-            category: "cocktails",
-            ingredients: [
-                {
-                    name: "Four Roses bourbon",
-                    quantity: "1",
-                    unit: "oz"
-                },
-                {
-                    name: "almond bitters",
-                    quantity: "1-2",
-                    unit: "dashes"
-                },
-            ],
-            directions: [
-                {
-                    explanation: "Mix in glass, pour over ice."
-                },
-            ],
-            recipeCredit: {
-                url: "",
-                embedUrl: "",
-                account: "",
-                accountUrl: "",
-            }
-        }
-    ]
 
     function recipeCreditIsEmpty(creditObj) {
         if (creditObj.url == "" && creditObj.embedUrl == "" && creditObj.account == "" && creditObj.accountUrl == "")

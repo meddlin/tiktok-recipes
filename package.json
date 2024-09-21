@@ -1,31 +1,43 @@
 {
-  "name": "tiktok-recipes",
+  "name": "ship-fast-code",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint",
-    "test": "jest",
-    "test-watch": "jest --watch",
-    "coverage": "jest --collectCoverage --"
+    "lint": "next lint"
   },
   "dependencies": {
-    "next": "13.2.3",
+    "@auth/mongodb-adapter": "^1.0.0",
+    "@headlessui/react": "^1.7.18",
+    "axios": "^1.7.7",
+    "crisp-sdk-web": "^1.0.22",
+    "eslint": "8.47.0",
+    "eslint-config-next": "13.4.19",
+    "form-data": "^4.0.0",
+    "mailgun.js": "^9.4.1",
+    "mongodb": "^5.9.2",
+    "mongoose": "^7.6.10",
+    "next": "^14.2.13",
+    "next-auth": "^4.24.7",
+    "next-plausible": "^3.12.0",
+    "next-sitemap": "^4.2.3",
+    "nextjs-toploader": "^1.6.11",
+    "nodemailer": "^6.9.13",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-helmet": "^6.1.0"
+    "react-hot-toast": "^2.4.1",
+    "react-social-media-embed": "^2.5.13",
+    "react-syntax-highlighter": "^15.5.0",
+    "react-tooltip": "^5.26.3",
+    "stripe": "^13.11.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "autoprefixer": "^10.4.13",
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3",
-    "jest": "^29.3.1",
-    "jest-environment-jsdom": "^29.3.1",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.4"
+    "autoprefixer": "^10.4.19",
+    "daisyui": "^4.10.1",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

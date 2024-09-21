@@ -77,7 +77,7 @@ export default function Recipes() {
                     {/* side nav */}
                     <div>
                         <ul>
-                            {'abcdefghijklmnopqrstuvwxyz'.split('').map(c => <li className="py-2 pl-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{c}</li>)}
+                            {'abcdefghijklmnopqrstuvwxyz'.split('').map((c, key) => <li key={key} className="py-2 pl-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{c}</li>)}
                         </ul>
                     </div>
 
@@ -101,8 +101,8 @@ export default function Recipes() {
                     {/* filters */}
                     <div className="ml-16">
                         <ul>
-                            {['breakfast', 'lunch', 'dinner', 'dessert', 'drinks'].map(opt => (
-                                <li className="py-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{opt}</li>
+                            {['breakfast', 'lunch', 'dinner', 'dessert', 'drinks'].map((opt, key) => (
+                                <li key={key} className="py-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{opt}</li>
                             ))}
                         </ul>
                     </div>

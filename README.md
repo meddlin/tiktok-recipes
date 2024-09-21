@@ -33,3 +33,25 @@ To run the development server:
 A good summary list of scrapers: [https://elitedatascience.com/python-web-scraping-libraries#beautiful-soup](https://elitedatascience.com/python-web-scraping-libraries#beautiful-soup)
 
 Following this tutorial: [https://docs.scrapy.org/en/latest/intro/tutorial.html](https://docs.scrapy.org/en/latest/intro/tutorial.html)
+
+## Data Layer - Docker
+
+Start local database stack:
+
+```bash
+docker compose up -d
+```
+
+Data is persisted at the location specified in:
+
+```bash
+volumes:
+    - mongo-data:/data/db
+```
+
+Connection string for this db: `mongodb://root:example@localhost:27017/`
+
+> Note on connecting local clients, tools, etc.
+>
+> Within the docker compose file, and Docker network is in play and you can use the container name to connect to 
+> the host. However, use `localhost` from the local machine.

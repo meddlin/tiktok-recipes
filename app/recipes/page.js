@@ -184,6 +184,45 @@ export default function Recipes() {
                 accountUrl: "",
             }
         },
+        {
+            title: "Potato Salad",
+            description: "",
+            category: "",
+            ingredients: [
+                {
+                    name: "Gold potatoes",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "Eggs",
+                    quantity: "3",
+                    unit: ""
+                },
+                {
+                    name: "mayo",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "mustard",
+                    quantity: "",
+                    unit: ""
+                },
+            ],
+            directions: [
+                {
+                    explanation: "",
+                }
+            ],
+            notes: "",
+            recipeCredit: {
+                url: "",
+                embedUrl: "",
+                account: "",
+                accountUrl: "",
+            }
+        },
     ]
 
     function recipeCreditIsEmpty(creditObj) {

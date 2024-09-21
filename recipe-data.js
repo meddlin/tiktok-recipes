@@ -220,6 +220,109 @@ const recipes = [
             accountUrl: "",
         }
     },
+    {
+        title: "Cinnamon Bun Pancakes",
+        description: "pancakes with cool cinnamon swirls",
+        category: "breakfast",
+        ingredients: [
+            {
+                name: "(cinnamon swirl) packed ligh brown sugar",
+                quantity: "2/3",
+                unit: "cup"
+            },
+            {
+                name: "(cinnamon swirl) unsalted butter, melted",
+                quantity: "5",
+                unit: "tablespoons"
+            },
+            {
+                name: "(cinnamon swirl) ground cinnamon",
+                quantity: "1",
+                unit: "tablespoon"
+            },
+            {
+                name: "(icing) confectioners' sugar",
+                quantity: "1 1/4",
+                unit: "cups"
+            },
+            {
+                name: "(icing) milk",
+                quantity: "3",
+                unit: "tablespoons"
+            },
+            {
+                name: "(icing) fine salt",
+                quantity: "1",
+                unit: "pinch"
+            },
+            {
+                name: "(pancakes) all-purpose flour (See note!)",
+                quantity: "1 1/2",
+                unit: "cups"
+            },
+            {
+                name: "(pancakes) granulated sugar",
+                quantity: "3",
+                unit: "tablespoons"
+            },
+            {
+                name: "(pancakes) baking powder",
+                quantity: "1",
+                unit: "tablespoon"
+            },
+            {
+                name: "(pancakes) fine salt",
+                quantity: "1/4",
+                unit: "teaspoon"
+            },
+            {
+                name: "(pancakes) freshly grated nutmeg",
+                quantity: "1/8",
+                unit: "teaspoon"
+            },
+            {
+                name: "(pancakes) milk, room temperature",
+                quantity: "1 1/4",
+                unit: "cups"
+            },
+            {
+                name: "(pancakes) pure vanilla extract",
+                quantity: "1/2",
+                unit: "teaspoon"
+            },
+            {
+                name: "(pancakes) large eggs, room temperature",
+                quantity: "2",
+                unit: ""
+            },
+            {
+                name: "(pancakes) unsalted butter, melted, plus more as needed",
+                quantity: "3",
+                unit: "tablespoons"
+            },
+        ],
+        directions: [
+            {
+                explanation: "For the swirl: Combine the brown sugar, butter and cinnamon in a small bowl and mix until smooth. Pour into a small plastic re-sealable bag and cut 1/4 inch off a corner and store it with the opening upright in a small glass until ready to use. ",
+            },
+            {
+                explanation: "For the icing: Combine the confectioners' sugar, butter, milk and salt in a small bowl. Whisk until smooth and set side.  "
+            },
+            {
+                explanation: "For the pancakes: Whisk together the flour, sugar, baking powder, salt and nutmeg in a medium bowl until combined. Whisk together the milk, vanilla and eggs in a large bowl until well combined. Whisk the butter into the milk mixture then add the milk mixture to the flour mixture, whisking until smooth and well combined.  "
+            },
+            {
+                explanation: "Melt 1 teaspoon of the butter in a large nonstick skillet or griddle over medium heat. Ladle about a 1/4 cup of the batter into the skillet. Starting from the middle of the batter, pipe out a large swirl of the cinnamon swirl mixture with the outer most part of the swirl near the edge of the batter. Make 1 or 2 more pancakes, taking care to keep them evenly spaced apart, and repeat with the swirl. Cook until bubbles break the surface of the pancakes, and the undersides are golden brown, about 2 minutes. Flip with a spatula and cook about 1 minute more. Serve hot and swirl-side up, or transfer to a platter and cover loosely with foil to keep warm. Repeat with the remaining batter, adding more butter to the skillet as needed. Top with a drizzle of the icing before serving. "
+            }
+        ],
+        notes: "When measuring flour, we spoon it into a dry measuring cup and level off excess. (Scooping directly from the bag compacts the flour, resulting in dry baked goods.)",
+        recipeCredit: {
+            url: "https://www.foodnetwork.com/recipes/food-network-kitchen/cinnamon-bun-pancakes-3680276",
+            embedUrl: "",
+            account: "",
+            accountUrl: "",
+        }
+    },
 ]
 
 export default recipes;

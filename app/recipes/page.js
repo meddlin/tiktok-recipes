@@ -52,6 +52,76 @@ export default function Recipes() {
                 account: "",
                 accountUrl: "",
             }
+        },
+        {
+            title: "Gnocchi Alfredo",
+            description: "Cozy gnocchi in a creamy sauce",
+            category: "dinner",
+            ingredients: [
+                {
+                    name: "potato gnocchi",
+                    quantity: "1",
+                    unit: "package"
+                },
+                {
+                    name: "butter",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "all-purpose flour",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "milk",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "parmesan cheese",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "nutmeg",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "portobello mushrooms",
+                    quantity: "",
+                    unit: ""
+                },
+                {
+                    name: "parsley (optional)",
+                    quantity: "",
+                    unit: ""
+                }
+            ],
+            directions: [
+                {
+                    explanation: "Make the pasta"
+                },
+                {
+                    explanation: "Make sauce base"
+                },
+                {
+                    explanation: "Stir in cheese"
+                },
+                {
+                    explanation: "Cook the mushrooms, then combine"
+                },
+                {
+                    explanation: "Top with sauce and serve"
+                }
+            ],
+            recipeCredit: {
+                url: "https://www.tasteofhome.com/recipes/gnocchi-alfredo/",
+                embedUrl: "",
+                account: "",
+                accountUrl: "",
+            }
         }
     ]
 

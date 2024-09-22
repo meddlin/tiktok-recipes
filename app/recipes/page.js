@@ -1,8 +1,30 @@
 'use client'
 
+import { useState, useEffect } from 'react';
+import apiClient from "@/libs/api";
+import { AddRecipeModal, AddRecipeModalContents, AddRecipeModalOpenButton, AddRecipeModalDismissButton } from '@/components/AddRecipeModal';
 import recipes from '@/recipe-data';
+import AddRecipeForm from './add-recipe-form';
 
 export default function Recipes() {
+    const [recipeData, setRecipeData] = useState([]);
+    
+    const getRecipes = async () => {
+        const data = await apiClient.post("/recipes")
+            .then(function (res) {
+                console.log(`CLIENT - res in request: ${res}`)
+                return res
+            });
+        return data;
+    }
+
+    useEffect(() => {
+        (async () => {
+            let data = await getRecipes();
+            console.log(`CLIENT - data in useEffect: ${data}`);
+            setRecipeData(data);
+        })();
+    }, []);
 
     function recipeCreditIsEmpty(creditObj) {
         if (creditObj.url == "" && creditObj.embedUrl == "" && creditObj.account == "" && creditObj.accountUrl == "")
@@ -19,7 +41,18 @@ export default function Recipes() {
                 </div>
 
                 <div>
-                    <button onClick={() => alert('add new recipe')}>Add New</button>
+                    <AddRecipeModal>
+                        <AddRecipeModalOpenButton>
+                            <button>Add New</button>
+                        </AddRecipeModalOpenButton>
+                        <AddRecipeModalContents>
+                            <AddRecipeForm />
+                        </AddRecipeModalContents>
+                    </AddRecipeModal>
+                </div>
+
+                <div>
+                    {(recipeData && recipeData.length > 0) ? recipeData.map((recipe, key) => (<p key={key}>{JSON.stringify(recipe)}</p>)) : 'no recipe data from server'}
                 </div>
 
                 <div className="flex mt-16">

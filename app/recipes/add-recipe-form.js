@@ -4,7 +4,7 @@ import DaisyInput from "@/components/DaisyInput";
 import DaisyButton from "@/components/DaisyButton";
 import apiClient from "@/libs/api";
 
-export default function AddRecipeForm({ }) {
+export default function AddRecipeForm() {
     const validationSchema = object().shape({
         title: string().required('Required')
     })

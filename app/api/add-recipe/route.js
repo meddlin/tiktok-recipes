@@ -19,7 +19,10 @@ export async function POST(req) {
             title: body.title,
             description: body.description,
             category: body.category,
-            ingredients: body.ingredients
+            ingredients: body.ingredients,
+            directions: body.directions,
+            notes: body.notes,
+            recipeCredit: body.recipeCredit
         });
 
         return NextResponse.json({ });

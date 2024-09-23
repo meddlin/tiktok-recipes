@@ -31,7 +31,17 @@ export default function AddRecipeForm() {
                             ingredients: [
                                 { name: 'eggs', quantity: '1' },
                                 { name: 'sugar', quantity: 'some' }
-                            ]
+                            ],
+                            directions: [
+                                { explanation: 'this is a step in the process' }
+                            ],
+                            notes: "Pay attention. Measure preciesely.",
+                            recipeCredit: {
+                                url: "test",
+                                embedUrl: "test",
+                                account: "test",
+                                accountUrl: "test"
+                            }
                         })
                     } catch (error) {
                         console.log(error);

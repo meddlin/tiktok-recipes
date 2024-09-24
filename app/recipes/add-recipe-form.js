@@ -10,13 +10,19 @@ export default function AddRecipeForm() {
     })
 
     const initialValues = {
-        title: 'Sample recipe'
+        title: 'Sample recipe',
+        description: '',
+        category: '',
+        ingredients: [],
+        directions: [],
+        notes: '',
+        recipeCredit: {}
     }
 
     return (
         <>
             <div className="bg-slate-400 py-5 mb-10">
-                <h2 className="flex justify-center items-center text-xl font-bold text-slate-900">Add fuel log</h2>
+                <h2 className="flex justify-center items-center text-xl font-bold text-slate-900">Add recipe</h2>
             </div>
 
             <Formik
@@ -66,6 +72,103 @@ export default function AddRecipeForm() {
                                     value={values.title}
                                 />
                                 <ErrorMessage name="title" component="span" className="error text-xs text-red-700" />
+
+                                <DaisyInput
+                                    label="Description"
+                                    name="description"
+                                    id="description"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.description && touched.description ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.description}
+                                />
+                                <ErrorMessage name="description" component="span" className="error text-xs text-red-700" />
+
+                                <DaisyInput
+                                    label="Category"
+                                    name="category"
+                                    id="category"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.category && touched.category ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.category}
+                                />
+                                <ErrorMessage name="category" component="span" className="error text-xs text-red-700" />
+
+                                {/* ingredients */}
+
+                                {/* directions */}
+
+                                <DaisyInput
+                                    label="Notes"
+                                    name="notes"
+                                    id="notes"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.notes && touched.notes ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.notes}
+                                />
+                                <ErrorMessage name="notes" component="span" className="error text-xs text-red-700" />
+
+                                <p>Recipe Credit</p>
+
+                                <DaisyInput
+                                    label="Credit URL"
+                                    name="creditUrl"
+                                    id="creditUrl"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.creditUrl && touched.creditUrl ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.creditUrl}
+                                />
+                                <ErrorMessage name="creditUrl" component="span" className="error text-xs text-red-700" />
+
+                                <DaisyInput
+                                    label="Embed URL"
+                                    name="embedUrl"
+                                    id="embedUrl"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.embedUrl && touched.embedUrl ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.embedUrl}
+                                />
+                                <ErrorMessage name="embedUrl" component="span" className="error text-xs text-red-700" />
+
+                                <DaisyInput
+                                    label="Account"
+                                    name="account"
+                                    id="account"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.account && touched.account ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.account}
+                                />
+                                <ErrorMessage name="account" component="span" className="error text-xs text-red-700" />
+
+                                <DaisyInput
+                                    label="Account URL"
+                                    name="accountUrl"
+                                    id="accountUrl"
+                                    type={'text'}
+                                    labelClassName={'my-2'}
+                                    className={`${errors.accountUrl && touched.accountUrl ? 'input-error' : ''}`}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.accountUrl}
+                                />
+                                <ErrorMessage name="accountUrl" component="span" className="error text-xs text-red-700" />
                             </div>
 
                             <div className="flex justify-between my-5">

@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import apiClient from "@/libs/api";
 import { AddRecipeModal, AddRecipeModalContents, AddRecipeModalOpenButton, AddRecipeModalDismissButton } from '@/components/AddRecipeModal';
-import recipes from '@/recipe-data';
+// import recipes from '@/recipe-data';
 import AddRecipeForm from './add-recipe-form';
 
 export default function Recipes() {
-    const [recipeData, setRecipeData] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     
     const getRecipes = async () => {
         const data = await apiClient.post("/recipes")
@@ -22,13 +22,14 @@ export default function Recipes() {
         (async () => {
             let data = await getRecipes();
             console.log(`CLIENT - data in useEffect: ${data}`);
-            setRecipeData(data);
+            setRecipes(data);
         })();
     }, []);
 
     function recipeCreditIsEmpty(creditObj) {
-        if (creditObj.url == "" && creditObj.embedUrl == "" && creditObj.account == "" && creditObj.accountUrl == "")
+        if (!creditObj || (creditObj.url == "" && creditObj.embedUrl == "" && creditObj.account == "" && creditObj.accountUrl == "")) {
             return true;
+        }
         
         return false;
     }
@@ -51,9 +52,9 @@ export default function Recipes() {
                     </AddRecipeModal>
                 </div>
 
-                <div>
+                {/* <div>
                     {(recipeData && recipeData.length > 0) ? recipeData.map((recipe, key) => (<p key={key}>{JSON.stringify(recipe)}</p>)) : 'no recipe data from server'}
-                </div>
+                </div> */}
 
                 <div className="flex mt-16">
                     {/* side nav */}

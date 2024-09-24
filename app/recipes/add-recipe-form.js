@@ -13,7 +13,7 @@ export default function AddRecipeForm() {
     })
 
     const initialValues = {
-        title: 'Sample recipe',
+        title: '',
         description: '',
         category: '',
         ingredients: [],

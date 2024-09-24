@@ -6,7 +6,10 @@ import apiClient from "@/libs/api";
 
 export default function AddRecipeForm() {
     const validationSchema = object().shape({
-        title: string().required('Required')
+        title: string().required('Required'),
+        description: string(),
+        category: string(),
+        notes: string()
     })
 
     const initialValues = {
@@ -16,7 +19,7 @@ export default function AddRecipeForm() {
         ingredients: [],
         directions: [],
         notes: '',
-        recipeCredit: {}
+        // recipeCredit: {}
     }
 
     return (

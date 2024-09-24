@@ -34,9 +34,9 @@ export default function AddRecipeForm() {
                 onSubmit={async (values, actions) => {
                     try {
                         await apiClient.post('/add-recipe', {
-                            title: 'Sample recipe title',
-                            description: 'this is a sample description',
-                            category: 'dinner',
+                            title: values.title,
+                            description: values.description,
+                            category: values.category,
                             ingredients: [
                                 { name: 'eggs', quantity: '1' },
                                 { name: 'sugar', quantity: 'some' }
@@ -44,7 +44,7 @@ export default function AddRecipeForm() {
                             directions: [
                                 { explanation: 'this is a step in the process' }
                             ],
-                            notes: "Pay attention. Measure preciesely.",
+                            notes: values.notes,
                             recipeCredit: {
                                 url: "test",
                                 embedUrl: "test",

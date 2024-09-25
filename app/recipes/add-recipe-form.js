@@ -44,9 +44,7 @@ export default function AddRecipeForm() {
                             description: values.description,
                             category: values.category,
                             ingredients: tempIngredients,
-                            directions: [
-                                { explanation: 'this is a step in the process' }
-                            ],
+                            directions: tempDirections,
                             notes: values.notes,
                             recipeCredit: {
                                 url: "test",
@@ -66,7 +64,9 @@ export default function AddRecipeForm() {
                     <>
                         <span>{JSON.stringify(values)}</span>
                         <br />
-                        <span>ingredients: {JSON.stringify(tempIngredients)}</span>
+                        <span><b>ingredients</b>: {JSON.stringify(tempIngredients)}</span>
+                        <br />
+                        <span><b>directions</b>: {JSON.stringify(tempDirections)}</span>
 
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col">
@@ -123,15 +123,27 @@ export default function AddRecipeForm() {
 
                                 {/* ingredients */}
                                 <input />
-                                <button onClick={() => {
+                                <div
+                                    className="cursor-pointer" 
+                                    onClick={() => {
                                     let arr = [{name: 'ex name', quantity: '1', unit: 'oz' }, ...tempIngredients]
                                     setTempIngredients(arr)
                                 }}
                                 >
                                     +1 ingr
-                                </button>
+                                </div>
 
                                 {/* directions */}
+                                <input />
+                                <div 
+                                    className="cursor-pointer" 
+                                    onClick={() => {
+                                    let arr = [{explanation: 'do a thing'}, ...tempDirections]
+                                    setTempDirections(arr)
+                                }}
+                                >
+                                    +1 dirc
+                                </div>
 
                                 <NotesArea 
                                     label={'Notes'}

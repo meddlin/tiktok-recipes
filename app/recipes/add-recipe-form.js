@@ -2,7 +2,9 @@ import { useFormikContext, Formik, Field, ErrorMessage } from "formik";
 import { object, string, number, date } from 'yup';
 import DaisyInput from "@/components/DaisyInput";
 import DaisyButton from "@/components/DaisyButton";
+import ComboSelector from "@/components/ComboSelector";
 import apiClient from "@/libs/api";
+import NotesArea from "@/components/NotesArea";
 
 export default function AddRecipeForm() {
     const validationSchema = object().shape({
@@ -61,6 +63,8 @@ export default function AddRecipeForm() {
             >
                 {({ setFieldValue, handleChange, handleBlur, handleReset, handleSubmit, values, errors, touched, isValid, dirty }) => (
                     <>
+                        <span>{JSON.stringify(values)}</span>
+
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col">
                                 <DaisyInput
@@ -89,7 +93,7 @@ export default function AddRecipeForm() {
                                 />
                                 <ErrorMessage name="description" component="span" className="error text-xs text-red-700" />
 
-                                <DaisyInput
+                                {/* <DaisyInput
                                     label="Category"
                                     name="category"
                                     id="category"
@@ -100,13 +104,25 @@ export default function AddRecipeForm() {
                                     onBlur={handleBlur}
                                     value={values.category}
                                 />
+                                <ErrorMessage name="category" component="span" className="error text-xs text-red-700" /> */}
+                                <label>Category</label>
+                                <ComboSelector
+                                    data={['breakfast', 'lunch', 'dinner', 'dessert', 'drinks']}
+                                    name="category"
+                                    id="category"
+                                    value={values.category}
+                                    onChange={data => {
+                                        handleChange(data);
+                                        setFieldValue('category', data);
+                                    }}
+                                />
                                 <ErrorMessage name="category" component="span" className="error text-xs text-red-700" />
 
                                 {/* ingredients */}
 
                                 {/* directions */}
 
-                                <DaisyInput
+                                {/* <DaisyInput
                                     label="Notes"
                                     name="notes"
                                     id="notes"
@@ -116,6 +132,13 @@ export default function AddRecipeForm() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.notes}
+                                /> */}
+                                <NotesArea 
+                                    label={'Notes'}
+                                    id={'notes'}
+                                    name={'notes'}
+                                    value={values.notes}
+                                    onChange={handleChange}
                                 />
                                 <ErrorMessage name="notes" component="span" className="error text-xs text-red-700" />
 

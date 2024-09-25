@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useFormikContext, Formik, Field, ErrorMessage } from "formik";
 import { object, string, number, date } from 'yup';
 import DaisyInput from "@/components/DaisyInput";
@@ -7,6 +8,9 @@ import apiClient from "@/libs/api";
 import NotesArea from "@/components/NotesArea";
 
 export default function AddRecipeForm() {
+    const [tempIngredients, setTempIngredients] = useState([]);
+    const [tempDirections, setTempDirections] = useState([]);
+
     const validationSchema = object().shape({
         title: string().required('Required'),
         description: string(),
@@ -39,10 +43,7 @@ export default function AddRecipeForm() {
                             title: values.title,
                             description: values.description,
                             category: values.category,
-                            ingredients: [
-                                { name: 'eggs', quantity: '1' },
-                                { name: 'sugar', quantity: 'some' }
-                            ],
+                            ingredients: tempIngredients,
                             directions: [
                                 { explanation: 'this is a step in the process' }
                             ],
@@ -64,6 +65,8 @@ export default function AddRecipeForm() {
                 {({ setFieldValue, handleChange, handleBlur, handleReset, handleSubmit, values, errors, touched, isValid, dirty }) => (
                     <>
                         <span>{JSON.stringify(values)}</span>
+                        <br />
+                        <span>ingredients: {JSON.stringify(tempIngredients)}</span>
 
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col">
@@ -119,20 +122,17 @@ export default function AddRecipeForm() {
                                 <ErrorMessage name="category" component="span" className="error text-xs text-red-700" />
 
                                 {/* ingredients */}
+                                <input />
+                                <button onClick={() => {
+                                    let arr = [{name: 'ex name', quantity: '1', unit: 'oz' }, ...tempIngredients]
+                                    setTempIngredients(arr)
+                                }}
+                                >
+                                    +1 ingr
+                                </button>
 
                                 {/* directions */}
 
-                                {/* <DaisyInput
-                                    label="Notes"
-                                    name="notes"
-                                    id="notes"
-                                    type={'text'}
-                                    labelClassName={'my-2'}
-                                    className={`${errors.notes && touched.notes ? 'input-error' : ''}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.notes}
-                                /> */}
                                 <NotesArea 
                                     label={'Notes'}
                                     id={'notes'}
@@ -199,14 +199,14 @@ export default function AddRecipeForm() {
 
                             <div className="flex justify-between my-5">
                                 <DaisyButton
-                                    label="Submit"
-                                    type="submit"
-                                    className="btn-success"
-                                />
-                                <DaisyButton
                                     label="Clear"
                                     type="button"
                                     onClick={handleReset}
+                                />
+                                <DaisyButton
+                                    label="Submit"
+                                    type="submit"
+                                    className="btn-success"
                                 />
                             </div>
                         </form>

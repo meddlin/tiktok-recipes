@@ -122,30 +122,58 @@ export default function AddRecipeForm() {
                                 <ErrorMessage name="category" component="span" className="error text-xs text-red-700" />
 
                                 {/* ingredients */}
-                                <input />
+                                <h3>Ingredients</h3>
+                                {tempIngredients && tempIngredients.length > 0 ? tempIngredients.map((ingr, key) => {
+                                    return (
+                                        <div key={key} className="flex flex-row">
+                                            <input placeholder='name' />
+                                            <input placeholder='quantity' />
+                                            <input placeholder='unit' />
+                                            <div onClick={() => console.log('remove ingredient')}>REM -</div>
+                                        </div>
+                                    )
+                                }) : <div className="flex flex-row">
+                                    <input placeholder='name' />
+                                    <input placeholder='quantity' />
+                                    <input placeholder='unit' />
+                                    <div onClick={() => console.log('remove ingredient')}>REM -</div>
+                                </div>
+                                }
                                 <div
-                                    className="cursor-pointer" 
+                                    className="cursor-pointer"
                                     onClick={() => {
-                                    let arr = [{name: 'ex name', quantity: '1', unit: 'oz' }, ...tempIngredients]
-                                    setTempIngredients(arr)
-                                }}
+                                        let arr = [{ name: 'ex name', quantity: '1', unit: 'oz' }, ...tempIngredients]
+                                        setTempIngredients(arr)
+                                    }}
                                 >
                                     +1 ingr
                                 </div>
 
                                 {/* directions */}
-                                <input />
-                                <div 
-                                    className="cursor-pointer" 
+                                <h3>Directions</h3>
+                                {tempDirections && tempDirections.length > 0 ? tempDirections.map((dirc, key) => {
+                                    return (
+                                        <div key={key} className="flex flex-row">
+                                            <input placeholder='name' value={dirc.explanation} />
+                                            <div onClick={() => console.log('remove direction')}>REM -</div>
+                                        </div>
+                                    )
+                                }) : <div className="flex flex-row">
+                                    <input placeholder='name' />
+                                    <div onClick={() => console.log('remove direction')}>REM -</div>
+                                </div>
+                                }
+                                <div
+                                    className="cursor-pointer"
                                     onClick={() => {
-                                    let arr = [{explanation: 'do a thing'}, ...tempDirections]
-                                    setTempDirections(arr)
-                                }}
+                                        let arr = [{ explanation: 'do a thing' }, ...tempDirections]
+                                        setTempDirections(arr)
+                                    }}
                                 >
                                     +1 dirc
                                 </div>
 
-                                <NotesArea 
+                                <NotesArea
                                     label={'Notes'}
                                     id={'notes'}
                                     name={'notes'}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useFormikContext, Formik, Field, ErrorMessage } from "formik";
+import { useFormikContext, Formik, Field, FieldArray, ErrorMessage } from "formik";
 import { object, string, number, date } from 'yup';
 import DaisyInput from "@/components/DaisyInput";
 import DaisyButton from "@/components/DaisyButton";
@@ -15,6 +15,8 @@ export default function AddRecipeForm() {
         title: string().required('Required'),
         description: string(),
         category: string(),
+        // ingredients: [],
+        // directions: [{ explanation: '' }],
         notes: string()
     })
 
@@ -22,8 +24,8 @@ export default function AddRecipeForm() {
         title: '',
         description: '',
         category: '',
-        ingredients: [],
-        directions: [],
+        ingredients: [{ name: '', quantity: '', unit: '' }],
+        directions: [{ explanation: '' }],
         notes: '',
         // recipeCredit: {}
     }
@@ -151,19 +153,69 @@ export default function AddRecipeForm() {
 
                                 {/* directions */}
                                 <h3>Directions</h3>
-                                {tempDirections && tempDirections.length > 0 ? tempDirections.map((dirc, key) => {
+                                {/* <Field name="directions[0].explanation" /> */}
+                                <FieldArray
+                                    name="directions"
+                                    render={arrayHelpers => (
+                                        <div>
+                                            {values.directions && values.directions.length > 0 ? (
+                                                values.directions.map((dirc, index) => (
+                                                    <div key={index}>
+                                                        <DaisyInput 
+                                                            name={`directions[${index}].explanation`}
+                                                            label="Expl:"
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            value={values.directions[index].explanation}
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => arrayHelpers.remove(index)} // remove from the list
+                                                        > - </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => arrayHelpers.insert(index, '')} // insert into the position
+                                                        > + </button>
+                                                    </div>
+                                                ))
+                                            ) : (<button type="button" onClick={() => arrayHelpers.push('')}>Add a direction</button>)}
+                                        </div>
+                                    )}
+                                />
+
+                                {/* {values.directions && values.directions.length > 0 ? values.directions.map((dirc, key) => {
                                     return (
                                         <div key={key} className="flex flex-row">
-                                            <input placeholder='name' value={dirc.explanation} />
+                                            <DaisyInput
+                                                // name={`${ dirc[key].explanation }`}
+
+                                                // name={`${dirc.explanation}`}
+                                                name={`${values.directions[key].explanation}`}
+
+                                                label="Expl:"
+                                                type={'text'}
+                                                // className={`${errors.dirc[key].explanation && touched.dirc[key].explanation ? 'input-error' : ''}`}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            // value={values.dirc[key].explanation}
+                                            />
                                             <div onClick={() => console.log('remove direction')}>REM -</div>
                                         </div>
                                     )
                                 }) : <div className="flex flex-row">
-                                    <input placeholder='name' />
+                                    <DaisyInput
+                                        name={`${dirc[key].explanation}`}
+                                        label="Expl:"
+                                        type={'text'}
+                                        className={`${errors.dirc[key].explanation && touched.dirc[key].explanation ? 'input-error' : ''}`}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.dirc[key].explanation}
+                                    />
                                     <div onClick={() => console.log('remove direction')}>REM -</div>
                                 </div>
-                                }
-                                <div
+                                } */}
+                                {/* <div
                                     className="cursor-pointer"
                                     onClick={() => {
                                         let arr = [{ explanation: 'do a thing' }, ...tempDirections]
@@ -171,7 +223,7 @@ export default function AddRecipeForm() {
                                     }}
                                 >
                                     +1 dirc
-                                </div>
+                                </div> */}
 
                                 <NotesArea
                                     label={'Notes'}

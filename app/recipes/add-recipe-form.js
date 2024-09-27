@@ -8,9 +8,6 @@ import apiClient from "@/libs/api";
 import NotesArea from "@/components/NotesArea";
 
 export default function AddRecipeForm() {
-    const [tempIngredients, setTempIngredients] = useState([]);
-    const [tempDirections, setTempDirections] = useState([]);
-
     const validationSchema = object().shape({
         title: string().required('Required'),
         description: string(),
@@ -27,7 +24,12 @@ export default function AddRecipeForm() {
         ingredients: [{ name: '', quantity: '', unit: '' }],
         directions: [{ explanation: '' }],
         notes: '',
-        // recipeCredit: {}
+        recipeCredit: {
+            url: '',
+            embedUrl: '',
+            account: '',
+            accountUrl: ''
+        }
     }
 
     return (
@@ -45,15 +47,10 @@ export default function AddRecipeForm() {
                             title: values.title,
                             description: values.description,
                             category: values.category,
-                            ingredients: tempIngredients,
-                            directions: tempDirections,
+                            ingredients: values.ingredients,
+                            directions: values.directions,
                             notes: values.notes,
-                            recipeCredit: {
-                                url: "test",
-                                embedUrl: "test",
-                                account: "test",
-                                accountUrl: "test"
-                            }
+                            recipeCredit: values.recipeCredit
                         })
                     } catch (error) {
                         console.log(error);
@@ -64,11 +61,8 @@ export default function AddRecipeForm() {
             >
                 {({ setFieldValue, handleChange, handleBlur, handleReset, handleSubmit, values, errors, touched, isValid, dirty }) => (
                     <>
-                        <span>{JSON.stringify(values)}</span>
-                        <br />
-                        <span><b>ingredients</b>: {JSON.stringify(tempIngredients)}</span>
-                        <br />
-                        <span><b>directions</b>: {JSON.stringify(tempDirections)}</span>
+                        {/* debugging form values */}
+                        {/* <span>{JSON.stringify(values)}</span> */}
 
                         <form onSubmit={handleSubmit}>
                             <div className="flex flex-col">
@@ -98,18 +92,6 @@ export default function AddRecipeForm() {
                                 />
                                 <ErrorMessage name="description" component="span" className="error text-xs text-red-700" />
 
-                                {/* <DaisyInput
-                                    label="Category"
-                                    name="category"
-                                    id="category"
-                                    type={'text'}
-                                    labelClassName={'my-2'}
-                                    className={`${errors.category && touched.category ? 'input-error' : ''}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.category}
-                                />
-                                <ErrorMessage name="category" component="span" className="error text-xs text-red-700" /> */}
                                 <label>Category</label>
                                 <ComboSelector
                                     data={['breakfast', 'lunch', 'dinner', 'dessert', 'drinks']}
@@ -123,37 +105,53 @@ export default function AddRecipeForm() {
                                 />
                                 <ErrorMessage name="category" component="span" className="error text-xs text-red-700" />
 
-                                {/* ingredients */}
                                 <h3>Ingredients</h3>
-                                {tempIngredients && tempIngredients.length > 0 ? tempIngredients.map((ingr, key) => {
-                                    return (
-                                        <div key={key} className="flex flex-row">
-                                            <input placeholder='name' />
-                                            <input placeholder='quantity' />
-                                            <input placeholder='unit' />
-                                            <div onClick={() => console.log('remove ingredient')}>REM -</div>
+                                <FieldArray
+                                    name="ingredients"
+                                    render={arrayHelpers => (
+                                        <div>
+                                            {values.ingredients && values.ingredients.length > 0 ? (
+                                                values.ingredients.map((dirc, index) => (
+                                                    <div key={index}>
+                                                        <div className="flex flex-row">
+                                                            <DaisyInput
+                                                                name={`ingredients[${index}].name`}
+                                                                label="Name"
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                value={values.ingredients[index].name}
+                                                            />
+                                                            <DaisyInput
+                                                                name={`ingredients[${index}].quantity`}
+                                                                label="Qty"
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                value={values.ingredients[index].quantity}
+                                                            />
+                                                            <DaisyInput
+                                                                name={`ingredients[${index}].unit`}
+                                                                label="Unit"
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                value={values.ingredients[index].unit}
+                                                            />
+                                                        </div>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => arrayHelpers.remove(index)} // remove from the list
+                                                        > - </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => arrayHelpers.insert(index, '')} // insert into the position
+                                                        > + </button>
+                                                    </div>
+                                                ))
+                                            ) : (<button type="button" onClick={() => arrayHelpers.push('')}>Add ingredient</button>)}
                                         </div>
-                                    )
-                                }) : <div className="flex flex-row">
-                                    <input placeholder='name' />
-                                    <input placeholder='quantity' />
-                                    <input placeholder='unit' />
-                                    <div onClick={() => console.log('remove ingredient')}>REM -</div>
-                                </div>
-                                }
-                                <div
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        let arr = [{ name: 'ex name', quantity: '1', unit: 'oz' }, ...tempIngredients]
-                                        setTempIngredients(arr)
-                                    }}
-                                >
-                                    +1 ingr
-                                </div>
+                                    )}
+                                />
 
-                                {/* directions */}
                                 <h3>Directions</h3>
-                                {/* <Field name="directions[0].explanation" /> */}
                                 <FieldArray
                                     name="directions"
                                     render={arrayHelpers => (
@@ -161,7 +159,7 @@ export default function AddRecipeForm() {
                                             {values.directions && values.directions.length > 0 ? (
                                                 values.directions.map((dirc, index) => (
                                                     <div key={index}>
-                                                        <DaisyInput 
+                                                        <DaisyInput
                                                             name={`directions[${index}].explanation`}
                                                             label="Expl:"
                                                             onChange={handleChange}
@@ -183,48 +181,6 @@ export default function AddRecipeForm() {
                                     )}
                                 />
 
-                                {/* {values.directions && values.directions.length > 0 ? values.directions.map((dirc, key) => {
-                                    return (
-                                        <div key={key} className="flex flex-row">
-                                            <DaisyInput
-                                                // name={`${ dirc[key].explanation }`}
-
-                                                // name={`${dirc.explanation}`}
-                                                name={`${values.directions[key].explanation}`}
-
-                                                label="Expl:"
-                                                type={'text'}
-                                                // className={`${errors.dirc[key].explanation && touched.dirc[key].explanation ? 'input-error' : ''}`}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                            // value={values.dirc[key].explanation}
-                                            />
-                                            <div onClick={() => console.log('remove direction')}>REM -</div>
-                                        </div>
-                                    )
-                                }) : <div className="flex flex-row">
-                                    <DaisyInput
-                                        name={`${dirc[key].explanation}`}
-                                        label="Expl:"
-                                        type={'text'}
-                                        className={`${errors.dirc[key].explanation && touched.dirc[key].explanation ? 'input-error' : ''}`}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.dirc[key].explanation}
-                                    />
-                                    <div onClick={() => console.log('remove direction')}>REM -</div>
-                                </div>
-                                } */}
-                                {/* <div
-                                    className="cursor-pointer"
-                                    onClick={() => {
-                                        let arr = [{ explanation: 'do a thing' }, ...tempDirections]
-                                        setTempDirections(arr)
-                                    }}
-                                >
-                                    +1 dirc
-                                </div> */}
-
                                 <NotesArea
                                     label={'Notes'}
                                     id={'notes'}
@@ -238,8 +194,8 @@ export default function AddRecipeForm() {
 
                                 <DaisyInput
                                     label="Credit URL"
-                                    name="creditUrl"
-                                    id="creditUrl"
+                                    name="recipeCredit.url"
+                                    id="recipeCredit.url"
                                     type={'text'}
                                     labelClassName={'my-2'}
                                     className={`${errors.creditUrl && touched.creditUrl ? 'input-error' : ''}`}
@@ -251,8 +207,8 @@ export default function AddRecipeForm() {
 
                                 <DaisyInput
                                     label="Embed URL"
-                                    name="embedUrl"
-                                    id="embedUrl"
+                                    name="recipeCredit.embedUrl"
+                                    id="recipeCredit.embedUrl"
                                     type={'text'}
                                     labelClassName={'my-2'}
                                     className={`${errors.embedUrl && touched.embedUrl ? 'input-error' : ''}`}
@@ -264,8 +220,8 @@ export default function AddRecipeForm() {
 
                                 <DaisyInput
                                     label="Account"
-                                    name="account"
-                                    id="account"
+                                    name="recipeCredit.account"
+                                    id="recipeCredit.account"
                                     type={'text'}
                                     labelClassName={'my-2'}
                                     className={`${errors.account && touched.account ? 'input-error' : ''}`}
@@ -277,8 +233,8 @@ export default function AddRecipeForm() {
 
                                 <DaisyInput
                                     label="Account URL"
-                                    name="accountUrl"
-                                    id="accountUrl"
+                                    name="recipeCredit.accountUrl"
+                                    id="recipeCredit.accountUrl"
                                     type={'text'}
                                     labelClassName={'my-2'}
                                     className={`${errors.accountUrl && touched.accountUrl ? 'input-error' : ''}`}

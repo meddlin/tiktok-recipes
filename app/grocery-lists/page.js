@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { GroceryListModal, GroceryListModalContents, GroceryListModalDismissButton, GroceryListModalOpenButton } from '@/components/GroceryListModal';
 
 export default function GroceryLists() {
@@ -49,8 +48,6 @@ export default function GroceryLists() {
         }
     ]
 
-    // const [modalOpen, setModalOpen] = useState(false);
-
     return (
         <div className="">
             <h2>Grocery Lists</h2>
@@ -69,8 +66,19 @@ export default function GroceryLists() {
                                     </li>
                                 </GroceryListModalOpenButton>
                                 <GroceryListModalContents>
-                                    <h3>list: {index}</h3>
-                                    <p>grocery list contents go here</p>
+                                    <div>
+                                        <div>{list.dateCreated}</div>
+                                        <div>Related recipes &gt;&gt;</div>
+                                        <ul>
+                                            {list.groceryItems && list.groceryItems.length > 0 ? list.groceryItems.map((item, index) => {
+                                                return (
+                                                    <li>
+                                                        <span>{item && item.quantity ? item.quantity : ''} {item && item.name ? item.name : ''}</span>
+                                                    </li>
+                                                )
+                                            }) : 'Add items to your grocery list'}
+                                        </ul>
+                                    </div>
                                     <GroceryListModalDismissButton>
                                         <div>CLOSE</div>
                                     </GroceryListModalDismissButton>

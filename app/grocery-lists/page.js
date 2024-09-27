@@ -72,7 +72,7 @@ export default function GroceryLists() {
                                         <ul>
                                             {list.groceryItems && list.groceryItems.length > 0 ? list.groceryItems.map((item, index) => {
                                                 return (
-                                                    <li>
+                                                    <li key={index}>
                                                         <span>{item && item.quantity ? item.quantity : ''} {item && item.name ? item.name : ''}</span>
                                                     </li>
                                                 )

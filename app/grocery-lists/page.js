@@ -56,7 +56,7 @@ export default function GroceryLists() {
                 <ul>
                     {groceryLists && groceryLists.length > 0 ? groceryLists.map((list, index) => {
                         return (
-                            <GroceryListModal>
+                            <GroceryListModal key={index}>
                                 <GroceryListModalOpenButton>
                                     <li key={index}
                                         className="my-2 cursor-pointer"

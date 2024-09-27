@@ -1,4 +1,7 @@
+'use client';
 
+import { useState } from 'react';
+import { GroceryListModal, GroceryListModalContents, GroceryListModalDismissButton, GroceryListModalOpenButton } from '@/components/GroceryListModal';
 
 export default function GroceryLists() {
     const groceryLists = [
@@ -46,6 +49,8 @@ export default function GroceryLists() {
         }
     ]
 
+    // const [modalOpen, setModalOpen] = useState(false);
+
     return (
         <div className="">
             <h2>Grocery Lists</h2>
@@ -54,12 +59,23 @@ export default function GroceryLists() {
                 <ul>
                     {groceryLists && groceryLists.length > 0 ? groceryLists.map((list, index) => {
                         return (
-                            <li key={index}
-                                className="my-2"
-                            >
-                                <div>{list.dateCreated}</div>
-                                <div>{list.groceryItems.length} items</div>
-                            </li>
+                            <GroceryListModal>
+                                <GroceryListModalOpenButton>
+                                    <li key={index}
+                                        className="my-2 cursor-pointer"
+                                    >
+                                        <div>{list.dateCreated}</div>
+                                        <div>{list.groceryItems.length} items</div>
+                                    </li>
+                                </GroceryListModalOpenButton>
+                                <GroceryListModalContents>
+                                    <h3>list: {index}</h3>
+                                    <p>grocery list contents go here</p>
+                                    <GroceryListModalDismissButton>
+                                        <div>CLOSE</div>
+                                    </GroceryListModalDismissButton>
+                                </GroceryListModalContents>
+                            </GroceryListModal>
                         )
                     }) : ''}
                 </ul>

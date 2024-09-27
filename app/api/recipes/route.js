@@ -4,7 +4,6 @@ import Recipe from "@/models/Recipe";
 
 export async function POST(req) {
     let cxn = await connectMongo();
-    console.log(`cxn: ${cxn}`)
 
     // const body = await req.json();
 

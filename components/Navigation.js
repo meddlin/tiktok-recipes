@@ -1,7 +1,21 @@
+'use client'
+
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Navigation() {
+    const pathname = usePathname();
+    const activeHeaderStyles = 'inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900';
+    const inactiveHeaderStyles = 'inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700';
+
+    function isActive(pathname, linkRoute) {
+        if (pathname === linkRoute) return true;
+
+        return false;
+    }
+
     return (
         <Disclosure as="nav" className="bg-white shadow">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -16,24 +30,24 @@ export default function Navigation() {
                         </div>
                         <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                             {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                            <a
+                            <Link
                                 href="/recipes"
-                                className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+                                className={isActive(pathname, '/recipes') ? activeHeaderStyles : inactiveHeaderStyles}
                             >
                                 Recipes
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/grocery-lists"
-                                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                className={isActive(pathname, '/grocery-lists') ? activeHeaderStyles : inactiveHeaderStyles}
                             >
                                 Grocery Lists
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/meal-plans"
-                                className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                className={isActive(pathname, '/meal-plans') ? activeHeaderStyles : inactiveHeaderStyles}
                             >
                                 Meal Plans
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:items-center">

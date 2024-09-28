@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import apiClient from "@/libs/api";
 import { AddRecipeModal, AddRecipeModalContents, AddRecipeModalOpenButton, AddRecipeModalDismissButton } from '@/components/AddRecipeModal';
-// import recipes from '@/recipe-data';
 import AddRecipeForm from './add-recipe-form';
 
 export default function Recipes() {
@@ -51,10 +50,6 @@ export default function Recipes() {
                         </AddRecipeModalContents>
                     </AddRecipeModal>
                 </div>
-
-                {/* <div>
-                    {(recipeData && recipeData.length > 0) ? recipeData.map((recipe, key) => (<p key={key}>{JSON.stringify(recipe)}</p>)) : 'no recipe data from server'}
-                </div> */}
 
                 <div className="flex mt-16">
                     {/* side nav */}

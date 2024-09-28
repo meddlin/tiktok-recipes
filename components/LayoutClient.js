@@ -8,6 +8,7 @@ import { SessionProvider } from "next-auth/react";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
+import Navigation from "./Navigation";
 import config from "@/config";
 
 // Crisp customer chat support:
@@ -59,6 +60,7 @@ const ClientLayout = ({ children }) => {
         <NextTopLoader color={config.colors.main} showSpinner={false} />
 
         {/* Content inside app/page.js files  */}
+        <Navigation />
         {children}
 
         {/* Show Success/Error messages anywhere from the app with toast() */}

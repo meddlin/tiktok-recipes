@@ -17,14 +17,6 @@ export default function AddGroceryListForm() {
             {
                 name: '',
                 quantity: ''
-            },
-            {
-                name: '',
-                quantity: ''
-            },
-            {
-                name: '',
-                quantity: ''
             }
         ],
         relatedRecipes: [
@@ -77,7 +69,7 @@ export default function AddGroceryListForm() {
                                 render={arrayHelpers => (
                                     <div>
                                         {values.groceryItems && values.groceryItems.length > 0 ? (
-                                            values.groceryItems.map((dirc, index) => (
+                                            values.groceryItems.map((item, index) => (
                                                 <div key={index}>
                                                     <div className="flex flex-row">
                                                         <DaisyInput
@@ -101,7 +93,7 @@ export default function AddGroceryListForm() {
                                                     > - </button>
                                                     <button
                                                         type="button"
-                                                        onClick={() => arrayHelpers.insert(index, '')} // insert into the position
+                                                        onClick={() => arrayHelpers.push(index, {name: '', quantity: ''})} // insert into the position
                                                     > + </button>
                                                 </div>
                                             ))

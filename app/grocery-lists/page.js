@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import DaisyButton from '@/components/DaisyButton';
 import { GroceryListModal, GroceryListModalContents, GroceryListModalDismissButton, GroceryListModalOpenButton } from '@/components/GroceryListModal';
+import { AddGroceryListModal, AddGroceryListModalContents, AddGroceryListModalOpenButton } from '@/components/AddGroceryListModal';
+import AddGroceryListForm from './add-grocery-list-form';
 
 export default function GroceryLists() {
     const groceryLists = [
@@ -53,8 +55,18 @@ export default function GroceryLists() {
     const [showEditForm, setShowEditForm] = useState(false);
 
     return (
-        <div className="">
+        <div className="flex flex-col justify-center items-center">
             <h2>Grocery Lists</h2>
+            <AddGroceryListModal>
+                <AddGroceryListModalOpenButton>
+                    <DaisyButton
+                    label="New Grocery List"
+                    type="button" />
+                </AddGroceryListModalOpenButton>
+                <AddGroceryListModalContents>
+                    <AddGroceryListForm />
+                </AddGroceryListModalContents>
+            </AddGroceryListModal>
 
             <div className="flex flex-col justify-center items-center">
                 <ul>

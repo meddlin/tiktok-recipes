@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import apiClient from "@/libs/api";
+import DaisyButton from '@/components/DaisyButton';
 import { AddRecipeModal, AddRecipeModalContents, AddRecipeModalOpenButton, AddRecipeModalDismissButton } from '@/components/AddRecipeModal';
 import AddRecipeForm from './add-recipe-form';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
-    
+
     const getRecipes = async () => {
         const data = await apiClient.post("/recipes")
             .then(function (res) {
@@ -29,26 +30,28 @@ export default function Recipes() {
         if (!creditObj || (creditObj.url == "" && creditObj.embedUrl == "" && creditObj.account == "" && creditObj.accountUrl == "")) {
             return true;
         }
-        
+
         return false;
     }
 
     return (
         <>
             <div className="flex flex-col justify-center items-center">
-                <div>
-                    <input placeholder="Search..." />
-                </div>
+                <div className="flex flex-row items-center">
+                    <div className="grow">
+                        <input placeholder="Search..." />
+                    </div>
 
-                <div>
-                    <AddRecipeModal>
-                        <AddRecipeModalOpenButton>
-                            <button>Add New</button>
-                        </AddRecipeModalOpenButton>
-                        <AddRecipeModalContents>
-                            <AddRecipeForm />
-                        </AddRecipeModalContents>
-                    </AddRecipeModal>
+                    <div className="ml-12 justify-self-end">
+                        <AddRecipeModal>
+                            <AddRecipeModalOpenButton>
+                                <DaisyButton label="+ Recipe" />
+                            </AddRecipeModalOpenButton>
+                            <AddRecipeModalContents>
+                                <AddRecipeForm />
+                            </AddRecipeModalContents>
+                        </AddRecipeModal>
+                    </div>
                 </div>
 
                 <div className="flex mt-16">
@@ -78,11 +81,28 @@ export default function Recipes() {
 
                     {/* filters */}
                     <div className="ml-16">
-                        <ul>
+                        <ul className="mb-10">
                             {['breakfast', 'lunch', 'dinner', 'dessert', 'drinks'].map((opt, key) => (
                                 <li key={key} className="py-2 leading-4 rounded-sm hover:bg-slate-100 hover:cursor-pointer">{opt}</li>
                             ))}
                         </ul>
+
+                        <hr />
+
+                        <div className="mt-10">
+                            <div
+                                className="my-4 cursor-pointer"
+                                onClick={() => alert('enables recipe selection')}
+                            >
+                                New grocery list
+                            </div>
+                            <div
+                                className="my-4 cursor-pointer"
+                                onClick={() => alert('enables recipe selection')}
+                            >
+                                New meal plan
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -15,15 +15,15 @@ export default function AddGroceryListForm() {
         name: '',
         groceryItems: [
             {
-                name: 'eggs',
+                name: '',
                 quantity: ''
             },
             {
-                name: 'bread',
+                name: '',
                 quantity: ''
             },
             {
-                name: 'milk',
+                name: '',
                 quantity: ''
             }
         ],

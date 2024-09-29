@@ -1,58 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import apiClient from '@/libs/api';
 import DaisyButton from '@/components/DaisyButton';
 import { GroceryListModal, GroceryListModalContents, GroceryListModalDismissButton, GroceryListModalOpenButton } from '@/components/GroceryListModal';
 import { AddGroceryListModal, AddGroceryListModalContents, AddGroceryListModalOpenButton } from '@/components/AddGroceryListModal';
 import AddGroceryListForm from './add-grocery-list-form';
 
 export default function GroceryLists() {
-    const groceryLists = [
-        {
-            userId: '',
-            dateCreated: '2024-09-27',
-            groceryItems: [  // Grocery items break out
-                {
-                    name: 'eggs',
-                    quantity: ''
-                },
-                {
-                    name: 'bread',
-                    quantity: ''
-                },
-                {
-                    name: 'milk',
-                    quantity: ''
-                }
-            ],
-            relatedRecipes: [  // Array of IDs of the recipes associated with the grocery list
-                'asdf1234', 'qwerty1234'
-            ]
-        },
-        {
-            userId: '',
-            dateCreated: '2024-09-27',
-            groceryItems: [  // Grocery items break out
-                {
-                    name: 'eggs',
-                    quantity: ''
-                },
-                {
-                    name: 'bread',
-                    quantity: ''
-                },
-                {
-                    name: 'milk',
-                    quantity: ''
-                }
-            ],
-            relatedRecipes: [  // Array of IDs of the recipes associated with the grocery list
-                'asdf1234', 'qwerty1234'
-            ]
-        }
-    ]
-
     const [showEditForm, setShowEditForm] = useState(false);
+    const [groceryLists, setGroceryLists] = useState([]);
+
+    const getGroceryLists = async () => {
+        const data = await apiClient.post("/grocery-lists")
+            .then(function (res) {
+                console.log(`CLIENT - res in request: ${res}`)
+                return res
+            });
+        return data;
+    }
+
+    useEffect(() => {
+        (async () => {
+            let data = await getGroceryLists();
+            console.log(`CLIENT - data in useEffect: ${data}`);
+            setGroceryLists(data);
+        })();
+    }, []);
 
     return (
         <div className="flex flex-col justify-center items-center">

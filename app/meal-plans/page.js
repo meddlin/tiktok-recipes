@@ -10,9 +10,30 @@ export default function MealPlans() {
             ],
             days: [
                 {
-                    breakfast: '',
-                    lunch: '',
-                    dinner: '',
+                    breakfast: 'breakfast burrito',
+                    lunch: 'grilled chicken salad',
+                    dinner: 'low-carb tacos',
+                    snack: ''
+                },
+                {
+                    breakfast: 'breakfast burrito',
+                    lunch: 'grilled chicken salad',
+                    dinner: 'low-carb tacos',
+                    snack: ''
+                }
+            ]
+        },
+        {
+            createdDate: '2024-10-02',
+            name: '', // name of a meal plan is optional
+            recipes: [
+                { name: '', recipeId: '' }
+            ],
+            days: [
+                {
+                    breakfast: 'breakfast burrito',
+                    lunch: 'grilled chicken salad',
+                    dinner: 'low-carb tacos',
                     snack: ''
                 }
             ]
@@ -20,7 +41,7 @@ export default function MealPlans() {
     ]
     
     return (
-        <>
+        <div className="flex flex-col justify-center items-center">
             <h2>Meal Plans</h2>
 
             <p>
@@ -28,23 +49,29 @@ export default function MealPlans() {
             </p>
 
             <div>
-                <h2>Week 24 - name of meal plan?</h2>
-                <div>
-                    <h3>Day 1</h3>
-                    <ul>
-                        <li>
-                            <div>Breakfast - breakfast burrito</div>
-                        </li>
-                        <li>
-                            <div>Lunch - grilled chicken salad</div>
-                        </li>
-                        <li>
-                            <div>Dinner - low-carb tacos</div>
-                        </li>
-                    </ul>
-                </div>
-
+                {mealPlans && mealPlans.length > 0 ? mealPlans.map((plan, index) => {
+                    return (
+                        <div key={`plan-${index}`}
+                            className="my-8"
+                        >
+                            <h2>{plan.createdDate} {plan.name !== '' ? `- ${plan.name}` : ''}</h2>
+                            {plan.days && plan.days.length ? plan.days.map((day, d_idx) => {
+                                return (
+                                    <div key={`day-${d_idx}`}>
+                                        <h3>Day {d_idx}</h3>
+                                        <ul>
+                                            <li>Breakfast: {day.breakfast}</li>
+                                            <li>Lunch: {day.lunch}</li>
+                                            <li>Dinner: {day.dinner}</li>
+                                        </ul>
+                                    </div>
+                                );
+                            }) : ''}
+                            <div className="mt-4 cursor-pointer underline underline-offset-4">Related recipes...</div>
+                        </div>
+                    );
+                }) : 'Add a meal plan'}
             </div>
-        </>
+        </div>
     );
 }

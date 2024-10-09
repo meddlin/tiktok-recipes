@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import apiClient from "@/libs/api";
+import { useFormikContext, Formik, Field, FieldArray, ErrorMessage } from "formik";
 import DaisyButton from '@/components/DaisyButton';
 import { AddRecipeModal, AddRecipeModalContents, AddRecipeModalOpenButton, AddRecipeModalDismissButton } from '@/components/AddRecipeModal';
 import AddRecipeForm from './add-recipe-form';
@@ -66,34 +67,74 @@ export default function Recipes() {
                     {/* recipe list */}
                     <div className={`ml-4 ${selectingRecipes ? 'px-24 pb-12 pt-4 border-2 rounded-lg drop-shadow-md' : ''}`}>
                         {selectingRecipes ? (
-                            <fieldset>
-                                <legend className="sr-only">Recipes</legend>
-                                {recipes.length > 0 ? recipes.map((res, key) => {
-                                    return (
-                                        <div className="space-y-5" key={key}>
-                                            <div className="relative flex items-start">
-                                                <div className="flex h-6 items-center">
-                                                    <input
-                                                        id="comments"
-                                                        name="comments"
-                                                        type="checkbox"
-                                                        aria-describedby="comments-description"
-                                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                                    />
-                                                </div>
-                                                <div className="ml-3 text-sm leading-6">
-                                                    <label htmlFor="comments" className="font-medium text-gray-100">
-                                                        {res.title}
-                                                    </label>
-                                                    <p id="comments-description" className="text-gray-500">
-                                                        {res.description}
-                                                    </p>
-                                                </div>
-                                            </div>
+                            <Formik
+                                initialValues={{
+                                    // toggle: false,
+                                    // checked: [],
+                                    checkedRecipes: []
+                                }}
+                                // validationSchema={}
+                                onSubmit={(values, actions) => {
+                                    alert(`${JSON.stringify(values)}`)
+                                    // try {
+                                    //     alert(`submitted checkboxes: ${JSON.stringify(values)}`)
+                                    // } catch (error) {
+                                    //     console.log(error)
+                                    // }
+                                }}
+                            >
+                                {({ setFieldValue, handleChange, handleBlur, handleReset, handleSubmit, values, errors, touched, isValid, dirty }) => (
+                                    <>
+                                        {/* <label>
+                                            <Field type="checkbox" name="toggle" />
+                                            {`Field: ${values.toggle}`}
+                                        </label> */}
+                                        <br />
+                                        <div id="checkbox-group">Checked</div>
+                                        <div role="group" aria-labelledby="checkbox-group">
+                                            {/* <label>
+                                                <Field type="checkbox" name="checkedRecipes" value="One" />
+                                                One
+                                            </label>
+                                            <label>
+                                                <Field type="checkbox" name="checkedRecipes" value="Two" />
+                                                Two
+                                            </label>
+                                            <label>
+                                                <Field type="checkbox" name="checkedRecipes" value="Three" />
+                                                Three
+                                            </label> */}
+                                            {recipes.length > 0 ? recipes.map((res, key) => {
+                                                return (
+                                                    <>
+                                                        <div className="flex flex-col">
+                                                            <label>
+                                                                <Field type="checkbox" name="checkedRecipes" value={res.id} />
+                                                                {res.title}
+                                                            </label>
+                                                        </div>
+                                                    </>
+                                                );
+                                            }) : 'no recipes to select from'}
                                         </div>
-                                    );
-                                }) : 'no recipes to select from'}
-                            </fieldset>
+
+                                        <div className="flex justify-between my-5">
+                                            <DaisyButton
+                                                label="Clear"
+                                                type="button"
+                                                onClick={handleReset}
+                                            />
+                                            <DaisyButton
+                                                label="Create Grocery List"
+                                                type="submit"
+                                                className="btn-success"
+                                                onClick={handleSubmit}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+                            </Formik>
+
                         ) : (
                             <ul>
                                 {recipes.length > 0 ? recipes.map((res, key) => {
